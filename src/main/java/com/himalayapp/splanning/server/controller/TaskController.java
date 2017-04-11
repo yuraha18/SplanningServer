@@ -1,5 +1,6 @@
 package com.himalayapp.splanning.server.controller;
 
+import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.URL;
 import com.himalayapp.splanning.server.entity.Task;
 import com.himalayapp.splanning.server.service.TaskService;
@@ -13,27 +14,24 @@ import java.util.List;
 public class TaskController {
 
    @Autowired
-   private TaskService taskService;
+   private TaskService service;
 
-    @RequestMapping(value = URL.TASK + "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = Constants.TASK_URL+"/{userId}", method = RequestMethod.POST)
     @ResponseBody
-    public Task getTask(@PathVariable long id) {
-
-        return taskService.getByID(id);
-    }
-
-    @RequestMapping(value = "/tasks", method = RequestMethod.POST)
-    @ResponseBody
-    public Task saveRemider(@RequestBody Task task) {
+    public Task saveTask(@RequestBody Task task,  @PathVariable long userId) {
         System.out.println("save" + task.toString());
 
-        return taskService.save(task);
+        return service.save(task, userId);
     }
 
-
-    @RequestMapping(value = URL.TASK, method = RequestMethod.GET)
+    @RequestMapping(value = Constants.TASK_URL, method = RequestMethod.GET)
     public List<Task> loadAll() {
-        return taskService.getAll();
+        return service.getAll();
+    }
+
+    @RequestMapping(value = Constants.TASK_URL+"/{id}", method = RequestMethod.GET)
+    public Task getById(@PathVariable long id) {
+        return service.getById(id);
     }
 
 

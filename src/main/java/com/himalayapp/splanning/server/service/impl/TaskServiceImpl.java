@@ -1,6 +1,8 @@
 package com.himalayapp.splanning.server.service.impl;
 
 
+import com.himalayapp.splanning.server.Constants;
+import com.himalayapp.splanning.server.Synchronization;
 import com.himalayapp.splanning.server.entity.Synchronizer;
 import com.himalayapp.splanning.server.entity.Task;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
@@ -16,38 +18,28 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
-    private TaskRepository taskRepositiry;
+    private TaskRepository repository;
 
     @Autowired
-    private SynchronizerRepository sr;
+    private  SynchronizerRepository sr;
 
     public List<Task> getAll() {
-        return taskRepositiry.findAll();
+        return repository.findAll();
     }
 
-    public Task getByID(long id) {
-        return taskRepositiry.findOne(id);
-    }
 
-    public Task save(Task task) {
-        Task newTask = taskRepositiry.saveAndFlush(task);
-        System.out.println(newTask);
-        Synchronizer synchronizer = getSynchronizer(newTask, 1);
+    public Task save(Task task, long userId) {
+        Task newTask = repository.saveAndFlush(task);
+        int tableId = Constants.dbTables.get(Constants.TASK_TABLE);
 
-        sr.saveAndFlush(synchronizer);
+        sr.saveAndFlush(Synchronization.getSynchronizer(newTask.getId(), tableId, userId));
         return newTask;
     }
 
-    private Synchronizer getSynchronizer(Task newTask, int tableId) {
-        Synchronizer synch = new Synchronizer();
-        synch.setRowId(newTask.getId());
-        synch.setTableId(tableId);
-        synch.setUpdateTime(System.currentTimeMillis());
-
-        return synch;
+    public Task getById(long id) {
+        return repository.findOne(id);
     }
 
-    public void remove(long id) {
-       taskRepositiry.delete(id);
-    }
+
+
 }

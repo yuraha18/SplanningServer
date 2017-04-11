@@ -64,4 +64,16 @@ public class Synchronizer {
     public void setUpdateTime(long updateTime) {
         this.updateTime = updateTime;
     }
+
+
+    @Override
+    public String toString() {
+        return "Synchronizer{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", tableId=" + tableId +
+                ", rowId=" + rowId +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
