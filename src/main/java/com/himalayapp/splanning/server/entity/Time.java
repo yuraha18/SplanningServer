@@ -9,6 +9,13 @@ public class Time {
         return currentTime;
     }
 
+    @Override
+    public String toString() {
+        return "Time{" +
+                "currentTime=" + currentTime +
+                '}';
+    }
+
     public void setCurrentTime(long currentTime) {
         this.currentTime = currentTime;
     }

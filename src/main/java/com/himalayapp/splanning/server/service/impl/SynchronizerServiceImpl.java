@@ -39,4 +39,5 @@ public class SynchronizerServiceImpl implements SynchronizerService {
 
         return synchObjects;
     }
+
 }

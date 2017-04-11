@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface TaskService {
     List<Task> getAll();
-    Task getByID(long id);
-    Task save(Task remind);
-    void remove(long id);
+    Task save(Task remind, long userId);
+    Task getById(long id);
 }

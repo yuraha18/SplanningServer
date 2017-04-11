@@ -16,6 +16,15 @@ public class SynchObject {
     public SynchObject() {
     }
 
+    @Override
+    public String toString() {
+        return "SynchObject{" +
+                "id=" + id +
+                ", rowId=" + rowId +
+                ", tableId=" + tableId +
+                '}';
+    }
+
     public int getTableId() {
         return tableId;
     }

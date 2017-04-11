@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Tasks")
-public class Task implements BaseEntity {
+public class Task {
 
     @Id
     @GeneratedValue(generator = "increment")

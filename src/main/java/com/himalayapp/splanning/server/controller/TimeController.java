@@ -14,6 +14,8 @@ public class TimeController {
     {
         Time currentTime = new Time();
         currentTime.setCurrentTime(System.currentTimeMillis());
+        System.out.println("getTime");
+        System.out.println(currentTime);
         return currentTime;
     }
 }
