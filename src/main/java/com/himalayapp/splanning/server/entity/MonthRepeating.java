@@ -20,6 +20,27 @@ public class MonthRepeating {
     @Column(name = "day_of_month", nullable = false)
     private int dayOfMonth;
 
+    @Transient
+    private long localId;
+
+    @Override
+    public String toString() {
+        return "MonthRepeating{" +
+                "id=" + id +
+                ", taskId=" + taskId +
+                ", dayOfMonth=" + dayOfMonth +
+                ", localId=" + localId +
+                '}';
+    }
+
+    public long getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(long localId) {
+        this.localId = localId;
+    }
+
     public MonthRepeating() {
     }
 
@@ -45,6 +66,28 @@ public class MonthRepeating {
 
     public void setDayOfMonth(int dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MonthRepeating that = (MonthRepeating) o;
+
+        if (id != that.id) return false;
+        if (taskId != that.taskId) return false;
+        if (dayOfMonth != that.dayOfMonth) return false;
+        return localId == that.localId;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (taskId ^ (taskId >>> 32));
+        result = 31 * result + dayOfMonth;
+        result = 31 * result + (int) (localId ^ (localId >>> 32));
+        return result;
     }
 }
 

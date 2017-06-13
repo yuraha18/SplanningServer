@@ -2,9 +2,7 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.DoneTasks;
 import com.himalayapp.splanning.server.entity.Reminding;
-import com.himalayapp.splanning.server.repository.DoneTasksRepository;
 import com.himalayapp.splanning.server.repository.RemindingRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.service.RemindingService;

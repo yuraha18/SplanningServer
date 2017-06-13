@@ -5,8 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TaskToGoal")
-public class TaskToGoal {
+@Table(name = "InProgressTask")
+public class InProgressTask {
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -16,18 +16,14 @@ public class TaskToGoal {
     @Column(name = "task_id", nullable = false)
     private long taskId;
 
-    @Column(name = "goal_id", nullable = false)
-    private long goalId;
-
     @Transient
     private long localId;
 
     @Override
     public String toString() {
-        return "TaskToGoal{" +
+        return "InProgressTask{" +
                 "id=" + id +
                 ", taskId=" + taskId +
-                ", goalId=" + goalId +
                 ", localId=" + localId +
                 '}';
     }
@@ -40,7 +36,7 @@ public class TaskToGoal {
         this.localId = localId;
     }
 
-    public TaskToGoal() {
+    public InProgressTask() {
     }
 
     public long getId() {
@@ -59,24 +55,15 @@ public class TaskToGoal {
         this.taskId = taskId;
     }
 
-    public long getGoalId() {
-        return goalId;
-    }
-
-    public void setGoalId(long goalId) {
-        this.goalId = goalId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TaskToGoal that = (TaskToGoal) o;
+        InProgressTask that = (InProgressTask) o;
 
         if (id != that.id) return false;
         if (taskId != that.taskId) return false;
-        if (goalId != that.goalId) return false;
         return localId == that.localId;
     }
 
@@ -84,8 +71,8 @@ public class TaskToGoal {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (taskId ^ (taskId >>> 32));
-        result = 31 * result + (int) (goalId ^ (goalId >>> 32));
         result = 31 * result + (int) (localId ^ (localId >>> 32));
         return result;
     }
 }
+

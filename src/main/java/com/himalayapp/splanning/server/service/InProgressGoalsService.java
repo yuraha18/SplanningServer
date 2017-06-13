@@ -1,13 +1,13 @@
 package com.himalayapp.splanning.server.service;
 
 
-import com.himalayapp.splanning.server.entity.InProgressGoals;
+import com.himalayapp.splanning.server.entity.InProgressGoal;
 
 import java.util.List;
 
 public interface InProgressGoalsService {
-    List<InProgressGoals> getAll();
-    InProgressGoals save(InProgressGoals entity, long userId);
-    void remove(long id);
-    InProgressGoals getById(long id);
+    List<InProgressGoal> getAll();
+    InProgressGoal save(InProgressGoal entity, long userId);
+    void remove(long id, long userId);
+    InProgressGoal getById(long id);
 }

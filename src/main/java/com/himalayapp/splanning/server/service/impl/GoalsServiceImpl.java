@@ -2,9 +2,7 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.DoneTasks;
-import com.himalayapp.splanning.server.entity.Goals;
-import com.himalayapp.splanning.server.repository.DoneTasksRepository;
+import com.himalayapp.splanning.server.entity.Goal;
 import com.himalayapp.splanning.server.repository.GoalsRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.service.GoalsService;
@@ -22,23 +20,29 @@ public class GoalsServiceImpl implements GoalsService {
     @Autowired
     private SynchronizerRepository sr;
 
-    public List<Goals> getAll() {
+    public List<Goal> getAll() {
         return repository.findAll();
     }
 
-    public Goals save(Goals enitity, long userId) {
-        Goals newEntity = repository.saveAndFlush(enitity);
+    public Goal save(Goal enitity, long userId) {
+        System.out.println("save " + enitity);
+        Goal newEntity = repository.saveAndFlush(enitity);
 
         int tableId = Constants.dbTables.get(Constants.GOALS_TABLE);
         sr.saveAndFlush(Synchronization.getSynchronizer(newEntity.getId(), tableId, userId));
         return newEntity;
     }
 
-    public void remove(long id) {
-        repository.delete(id);
+    public void remove(long id, long userId) {
+        System.out.println("remove goal "+id) ;
+        if (repository.exists(id)) {
+            repository.delete(id);
+            int tableId = Constants.dbTables.get(Constants.GOALS_TABLE);
+            sr.saveAndFlush(Synchronization.getSynchronizer(id, tableId, userId));
+        }
     }
 
-    public Goals getById(long id) {
+    public Goal getById(long id) {
         return repository.findOne(id);
     }
 }

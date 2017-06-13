@@ -20,6 +20,9 @@ public class Repeating {
     @Column(name = "day_id", nullable = false)
     private long dayId;
 
+    @Transient
+    private long localId;
+
     public Repeating() {
     }
 
@@ -29,7 +32,16 @@ public class Repeating {
                 "id=" + id +
                 ", taskId=" + taskId +
                 ", dayId=" + dayId +
+                ", localId=" + localId +
                 '}';
+    }
+
+    public long getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(long localId) {
+        this.localId = localId;
     }
 
     public long getId() {
@@ -54,6 +66,28 @@ public class Repeating {
 
     public void setDayId(long dayId) {
         this.dayId = dayId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Repeating repeating = (Repeating) o;
+
+        if (id != repeating.id) return false;
+        if (taskId != repeating.taskId) return false;
+        if (dayId != repeating.dayId) return false;
+        return localId == repeating.localId;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (taskId ^ (taskId >>> 32));
+        result = 31 * result + (int) (dayId ^ (dayId >>> 32));
+        result = 31 * result + (int) (localId ^ (localId >>> 32));
+        return result;
     }
 }
 

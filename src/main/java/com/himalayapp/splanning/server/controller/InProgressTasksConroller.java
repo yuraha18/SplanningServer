@@ -1,9 +1,7 @@
 package com.himalayapp.splanning.server.controller;
 
 import com.himalayapp.splanning.server.Constants;
-import com.himalayapp.splanning.server.entity.DoneTasks;
-import com.himalayapp.splanning.server.entity.InProgressTasks;
-import com.himalayapp.splanning.server.service.DoneTasksService;
+import com.himalayapp.splanning.server.entity.InProgressTask;
 import com.himalayapp.splanning.server.service.InProgressTasksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +17,7 @@ public class InProgressTasksConroller {
 
     @RequestMapping(value = Constants.IN_PROGRESS_TASKS_URL+"/{userId}", method = RequestMethod.POST)
     @ResponseBody
-    public InProgressTasks save(@RequestBody InProgressTasks entity, @PathVariable long userId) {
+    public InProgressTask save(@RequestBody InProgressTask entity, @PathVariable long userId) {
         System.out.println("save" + entity.toString());
 
         return service.save(entity, userId);
@@ -27,12 +25,12 @@ public class InProgressTasksConroller {
 
 
     @RequestMapping(value = Constants.IN_PROGRESS_TASKS_URL, method = RequestMethod.GET)
-    public List<InProgressTasks> loadAll() {
+    public List<InProgressTask> loadAll() {
         return service.getAll();
     }
 
     @RequestMapping(value = Constants.IN_PROGRESS_TASKS_URL+"/{id}", method = RequestMethod.GET)
-    public InProgressTasks getById(@PathVariable long id) {
+    public InProgressTask getById(@PathVariable long id) {
         return service.getById(id);
     }
 

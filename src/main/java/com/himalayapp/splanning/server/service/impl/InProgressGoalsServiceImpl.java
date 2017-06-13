@@ -2,9 +2,7 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.DoneTasks;
-import com.himalayapp.splanning.server.entity.InProgressGoals;
-import com.himalayapp.splanning.server.repository.DoneTasksRepository;
+import com.himalayapp.splanning.server.entity.InProgressGoal;
 import com.himalayapp.splanning.server.repository.InProgressGoalsRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.service.InProgressGoalsService;
@@ -22,23 +20,34 @@ public class InProgressGoalsServiceImpl implements InProgressGoalsService {
     @Autowired
     private SynchronizerRepository sr;
 
-    public List<InProgressGoals> getAll() {
+    public List<InProgressGoal> getAll() {
         return repository.findAll();
     }
 
-    public InProgressGoals save(InProgressGoals enitity, long userId) {
-        InProgressGoals newEntity = repository.saveAndFlush(enitity);
+    public InProgressGoal save(InProgressGoal enitity, long userId) {
 
-        int tableId = Constants.dbTables.get(Constants.IN_PROGRESS_GOALS_TABLE);
-        sr.saveAndFlush(Synchronization.getSynchronizer(newEntity.getId(), tableId, userId));
-        return newEntity;
+        List<InProgressGoal> existRows = repository.findEqualItems(enitity.getGoalId());
+        if (existRows.isEmpty()) {
+            InProgressGoal newEntity = repository.saveAndFlush(enitity);
+
+            int tableId = Constants.dbTables.get(Constants.IN_PROGRESS_GOALS_TABLE);
+            sr.saveAndFlush(Synchronization.getSynchronizer(newEntity.getId(), tableId, userId));
+            return newEntity;
+        }
+
+        return existRows.get(0);
     }
 
-    public void remove(long id) {
-        repository.delete(id);
+    public void remove(long id, long userId) {
+
+        if (repository.exists(id)) {
+            repository.delete(id);
+            int tableId = Constants.dbTables.get(Constants.IN_PROGRESS_GOALS_TABLE);
+            sr.saveAndFlush(Synchronization.getSynchronizer(id, tableId, userId));
+        }
     }
 
-    public InProgressGoals getById(long id) {
+    public InProgressGoal getById(long id) {
         return repository.findOne(id);
     }
 }

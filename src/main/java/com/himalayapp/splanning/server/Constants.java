@@ -29,19 +29,19 @@ public class Constants {
     public static final String SAVE_LIST_URL = "/savelist";
 
     public static final String TASK_TABLE = "Tasks";
-    public static final String DONE_TASKS_TABLE = "DoneTasks";
-    public static final String IN_PROGRESS_TASKS_TABLE = "InProgressTasks";
+    public static final String DONE_TASKS_TABLE = "DoneTask";
+    public static final String IN_PROGRESS_TASKS_TABLE = "InProgressTask";
     public static final String REPEATING_TABLE = "Repeating";
     public static final String MONTH_REPEATING_TABLE = "MonthRepeating";
     public static final String REMINDING_TABLE = "Reminding";
-    public static final String GOALS_TABLE = "Goals";
-    public static final String DONE_GOALS_TABLE = "DoneGoals";
-    public static final String IN_PROGRESS_GOALS_TABLE = "InProgressGoals";
+    public static final String GOALS_TABLE = "Goal";
+    public static final String DONE_GOALS_TABLE = "DoneGoal";
+    public static final String IN_PROGRESS_GOALS_TABLE = "InProgressGoal";
     public static final String TASK_TO_GOAL_TABLE = "TaskToGoal";
-    public static final String DAYS_TABLE = "Days";
-    public static final String DELETED_TASKS_TABLE = "DeletedTasks";
+    public static final String DAYS_TABLE = "Day";
+    public static final String DELETED_TASKS_TABLE = "DeletedTask";
     public static final String TASK_LIFECYCLE_TABLE = "TaskLifecycle";
-    public static final String NOTIFICATIONS_TABLE = "Notifications";
+    public static final String NOTIFICATIONS_TABLE = "Notification";
 
 
     static  {

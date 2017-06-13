@@ -19,8 +19,6 @@ public class TaskController {
     @RequestMapping(value = Constants.TASK_URL+"/{userId}", method = RequestMethod.POST)
     @ResponseBody
     public Task saveTask(@RequestBody Task task,  @PathVariable long userId) {
-        System.out.println("save" + task.toString());
-
         return service.save(task, userId);
     }
 

@@ -22,6 +22,28 @@ public class TaskLifecycle {
     @Column(name = "day_to_id", nullable = false)
     private long dayToId;
 
+    @Override
+    public String toString() {
+        return "TaskLifecycle{" +
+                "id=" + id +
+                ", taskId=" + taskId +
+                ", dayFromId=" + dayFromId +
+                ", dayToId=" + dayToId +
+                ", localId=" + localId +
+                '}';
+    }
+
+    public long getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(long localId) {
+        this.localId = localId;
+    }
+
+    @Transient
+    private long localId;
+
     public TaskLifecycle() {
     }
 
@@ -55,6 +77,30 @@ public class TaskLifecycle {
 
     public void setDayToId(long dayToId) {
         this.dayToId = dayToId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TaskLifecycle that = (TaskLifecycle) o;
+
+        if (id != that.id) return false;
+        if (taskId != that.taskId) return false;
+        if (dayFromId != that.dayFromId) return false;
+        if (dayToId != that.dayToId) return false;
+        return localId == that.localId;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (taskId ^ (taskId >>> 32));
+        result = 31 * result + (int) (dayFromId ^ (dayFromId >>> 32));
+        result = 31 * result + (int) (dayToId ^ (dayToId >>> 32));
+        result = 31 * result + (int) (localId ^ (localId >>> 32));
+        return result;
     }
 }
 

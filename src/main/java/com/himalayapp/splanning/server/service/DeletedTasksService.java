@@ -1,13 +1,12 @@
 package com.himalayapp.splanning.server.service;
 
 
-import com.himalayapp.splanning.server.entity.Days;
-import com.himalayapp.splanning.server.entity.DeletedTasks;
+import com.himalayapp.splanning.server.entity.DeletedTask;
 
 import java.util.List;
 
 public interface DeletedTasksService {
-    List<DeletedTasks> getAll();
-    DeletedTasks save(DeletedTasks entity, long userId);
-    DeletedTasks getById(long id);
+    List<DeletedTask> getAll();
+    DeletedTask save(DeletedTask entity, long userId);
+    DeletedTask getById(long id);
 }

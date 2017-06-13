@@ -1,13 +1,13 @@
 package com.himalayapp.splanning.server.service;
 
 
-import com.himalayapp.splanning.server.entity.Notifications;
+import com.himalayapp.splanning.server.entity.Notification;
 
 import java.util.List;
 
 public interface NotificationsService {
-    List<Notifications> getAll();
-    Notifications save(Notifications entity, long userId);
-    void remove(long id);
-    Notifications getById(long id);
+    List<Notification> getAll();
+    Notification save(Notification entity, long userId);
+    void remove(long id, long userId);
+    Notification getById(long id);
 }

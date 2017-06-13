@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Tasks")
-public class Task implements BaseEntity {
+public class Task {
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -18,6 +18,9 @@ public class Task implements BaseEntity {
 
     @Column(name = "priority", nullable = false)
     private int priority;
+
+    @Transient
+    private long localId;
 
     public Task() {
     }
@@ -52,6 +55,37 @@ public class Task implements BaseEntity {
                 "id=" + id +
                 ", taskText='" + taskText + '\'' +
                 ", priority=" + priority +
+                ", localId=" + localId +
                 '}';
+    }
+
+    public long getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(long localId) {
+        this.localId = localId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (id != task.id) return false;
+        if (priority != task.priority) return false;
+        if (localId != task.localId) return false;
+        return taskText != null ? taskText.equals(task.taskText) : task.taskText == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (taskText != null ? taskText.hashCode() : 0);
+        result = 31 * result + priority;
+        result = 31 * result + (int) (localId ^ (localId >>> 32));
+        return result;
     }
 }

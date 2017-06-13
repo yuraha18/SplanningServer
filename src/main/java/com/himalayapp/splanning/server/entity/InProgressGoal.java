@@ -5,16 +5,13 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TaskToGoal")
-public class TaskToGoal {
+@Table(name = "InProgressGoal")
+public class InProgressGoal {
 
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
-
-    @Column(name = "task_id", nullable = false)
-    private long taskId;
 
     @Column(name = "goal_id", nullable = false)
     private long goalId;
@@ -24,9 +21,8 @@ public class TaskToGoal {
 
     @Override
     public String toString() {
-        return "TaskToGoal{" +
+        return "InProgressGoal{" +
                 "id=" + id +
-                ", taskId=" + taskId +
                 ", goalId=" + goalId +
                 ", localId=" + localId +
                 '}';
@@ -40,23 +36,12 @@ public class TaskToGoal {
         this.localId = localId;
     }
 
-    public TaskToGoal() {
-    }
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(long taskId) {
-        this.taskId = taskId;
     }
 
     public long getGoalId() {
@@ -72,10 +57,9 @@ public class TaskToGoal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TaskToGoal that = (TaskToGoal) o;
+        InProgressGoal that = (InProgressGoal) o;
 
         if (id != that.id) return false;
-        if (taskId != that.taskId) return false;
         if (goalId != that.goalId) return false;
         return localId == that.localId;
     }
@@ -83,9 +67,10 @@ public class TaskToGoal {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (taskId ^ (taskId >>> 32));
         result = 31 * result + (int) (goalId ^ (goalId >>> 32));
         result = 31 * result + (int) (localId ^ (localId >>> 32));
         return result;
     }
 }
+
+

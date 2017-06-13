@@ -2,9 +2,7 @@ package com.himalayapp.splanning.server.controller;
 
 
 import com.himalayapp.splanning.server.Constants;
-import com.himalayapp.splanning.server.entity.DoneTasks;
 import com.himalayapp.splanning.server.entity.TaskToGoal;
-import com.himalayapp.splanning.server.service.DoneTasksService;
 import com.himalayapp.splanning.server.service.TaskToGoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +29,10 @@ public class TaskToGoalController {
         return service.getAll();
     }
 
-    @RequestMapping(value = Constants.TASK_TO_GOAL_URL+"/{id}", method = RequestMethod.DELETE)
+   /* @RequestMapping(value = Constants.TASK_TO_GOAL_URL+"/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable long id) {
         service.remove(id);
-    }
+    }*/
 
     @RequestMapping(value = Constants.TASK_TO_GOAL_URL+"/{id}", method = RequestMethod.GET)
     public TaskToGoal getById(@PathVariable long id) {

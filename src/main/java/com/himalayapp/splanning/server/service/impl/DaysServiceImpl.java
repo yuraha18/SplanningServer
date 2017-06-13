@@ -3,10 +3,8 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.Days;
-import com.himalayapp.splanning.server.entity.DoneTasks;
+import com.himalayapp.splanning.server.entity.Day;
 import com.himalayapp.splanning.server.repository.DaysRepository;
-import com.himalayapp.splanning.server.repository.DoneTasksRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.service.DaysService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +21,30 @@ public class DaysServiceImpl implements DaysService {
     @Autowired
     private SynchronizerRepository sr;
 
-    public List<Days> getAll() {
+    public List<Day> getAll() {
         return repository.findAll();
     }
 
-    public Days save(Days enitity, long userId) {
+    public Day save(Day enitity, long userId) {
         String day = enitity.getText();
-       Days newDay = repository.getDay(day);
 
-       if (newDay!=null)
-       return newDay;
+      // Day newDay = repository.getDay(day);
+        Day   newEntity;
 
-        Days newEntity = repository.saveAndFlush(enitity);
+     //  if (newDay!=null)
+         //  newEntity= newDay;
+
+      // else
+            newEntity = repository.saveAndFlush(enitity);
 
         int tableId = Constants.dbTables.get(Constants.DAYS_TABLE);
-
         sr.saveAndFlush(Synchronization.getSynchronizer(newEntity.getId(), tableId, userId));
         return newEntity;
     }
 
-    public Days getById(long id) {
-        return repository.findOne(id);
+    public Day getById(long id) {
+       Day day = repository.findOne(id);
+        return day;
     }
 
 

@@ -2,8 +2,7 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.DoneTasks;
-import com.himalayapp.splanning.server.entity.Task;
+import com.himalayapp.splanning.server.entity.DoneTask;
 import com.himalayapp.splanning.server.repository.DoneTasksRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.service.DoneTasksService;
@@ -21,23 +20,28 @@ public class DoneTasksServiceImpl implements DoneTasksService{
     @Autowired
     private SynchronizerRepository sr;
 
-    public List<DoneTasks> getAll() {
+    public List<DoneTask> getAll() {
         return repository.findAll();
     }
 
-    public DoneTasks save(DoneTasks enitity, long userId) {
-        DoneTasks newEntity = repository.saveAndFlush(enitity);
+    public DoneTask save(DoneTask enitity, long userId) {
+        DoneTask newEntity = repository.saveAndFlush(enitity);
 
         int tableId = Constants.dbTables.get(Constants.DONE_TASKS_TABLE);
         sr.saveAndFlush(Synchronization.getSynchronizer(newEntity.getId(), tableId, userId));
         return newEntity;
     }
 
-    public void remove(long id) {
-     repository.delete(id);
+    public void remove(long id, long userId) {
+        if (repository.exists(id)) {
+            repository.delete(id);
+            int tableId = Constants.dbTables.get(Constants.DONE_TASKS_TABLE);
+            sr.saveAndFlush(Synchronization.getSynchronizer(id, tableId, userId));
+        }
     }
 
-    public DoneTasks getById(long id) {
+
+    public DoneTask getById(long id) {
         return repository.findOne(id);
     }
 }

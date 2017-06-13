@@ -8,6 +8,6 @@ import java.util.List;
 public interface MonthRepeatingService {
     List<MonthRepeating> getAll();
     MonthRepeating save(MonthRepeating entity, long userId);
-    void remove(long id);
+    void remove(long id, long userId);
     MonthRepeating getById(long id);
 }

@@ -37,6 +37,7 @@ public class SynchronizerServiceImpl implements SynchronizerService {
             synchObjects.add(synchObject);
         }
 
+        System.out.println(synchObjects);
         return synchObjects;
     }
 

@@ -1,12 +1,12 @@
 package com.himalayapp.splanning.server.repository;
 
 
-import com.himalayapp.splanning.server.entity.Days;
+import com.himalayapp.splanning.server.entity.Day;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface DaysRepository extends JpaRepository<Days, Long> {
+public interface DaysRepository extends JpaRepository<Day, Long> {
 
     @Query(value = "SELECT id, text FROM days WHERE text = ?1", nativeQuery = true)
-    Days getDay(String text);
+    Day getDay(String text);
 }

@@ -1,9 +1,7 @@
 package com.himalayapp.splanning.server.controller;
 
 import com.himalayapp.splanning.server.Constants;
-import com.himalayapp.splanning.server.entity.DoneTasks;
 import com.himalayapp.splanning.server.entity.MonthRepeating;
-import com.himalayapp.splanning.server.service.DoneTasksService;
 import com.himalayapp.splanning.server.service.MonthRepeatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +29,10 @@ public class MonthRepeatingController {
         return service.getAll();
     }
 
-    @RequestMapping(value = Constants.MONTH_REPEATING_URL+"/{id}", method = RequestMethod.DELETE)
+/*    @RequestMapping(value = Constants.MONTH_REPEATING_URL+"/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable long id) {
         service.remove(id);
-    }
+    }*/
 
     @RequestMapping(value = Constants.MONTH_REPEATING_URL+"/{id}", method = RequestMethod.GET)
     public MonthRepeating getById(@PathVariable long id) {

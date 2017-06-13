@@ -20,6 +20,27 @@ public class Reminding {
     @Column(name = "time", nullable = false)
     private String time;
 
+    @Transient
+    private long localId;
+
+    @Override
+    public String toString() {
+        return "Reminding{" +
+                "id=" + id +
+                ", taskId=" + taskId +
+                ", time='" + time + '\'' +
+                ", localId=" + localId +
+                '}';
+    }
+
+    public long getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(long localId) {
+        this.localId = localId;
+    }
+
     public long getId() {
         return id;
     }
@@ -42,6 +63,28 @@ public class Reminding {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Reminding reminding = (Reminding) o;
+
+        if (id != reminding.id) return false;
+        if (taskId != reminding.taskId) return false;
+        if (localId != reminding.localId) return false;
+        return time != null ? time.equals(reminding.time) : reminding.time == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (taskId ^ (taskId >>> 32));
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (int) (localId ^ (localId >>> 32));
+        return result;
     }
 }
 

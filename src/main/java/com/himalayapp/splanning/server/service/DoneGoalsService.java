@@ -1,12 +1,12 @@
 package com.himalayapp.splanning.server.service;
 
 
-import com.himalayapp.splanning.server.entity.DoneGoals;
+import com.himalayapp.splanning.server.entity.DoneGoal;
 
 import java.util.List;
 
 public interface DoneGoalsService {
-    List<DoneGoals> getAll();
-    DoneGoals save(DoneGoals entity, long userId);
-    DoneGoals getById(long id);
+    List<DoneGoal> getAll();
+    DoneGoal save(DoneGoal entity, long userId);
+    DoneGoal getById(long id);
 }

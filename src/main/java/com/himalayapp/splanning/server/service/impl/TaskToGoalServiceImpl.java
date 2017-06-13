@@ -2,9 +2,7 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.DoneTasks;
 import com.himalayapp.splanning.server.entity.TaskToGoal;
-import com.himalayapp.splanning.server.repository.DoneTasksRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.repository.TaskToGoalRepository;
 import com.himalayapp.splanning.server.service.TaskToGoalService;
@@ -34,8 +32,12 @@ public class TaskToGoalServiceImpl implements TaskToGoalService {
         return newEntity;
     }
 
-    public void remove(long id) {
-        repository.delete(id);
+    public void remove(long id, long userId) {
+        if (repository.exists(id)) {
+            repository.delete(id);
+            int tableId = Constants.dbTables.get(Constants.TASK_TO_GOAL_TABLE);
+            sr.saveAndFlush(Synchronization.getSynchronizer(id, tableId, userId));
+        }
     }
 
     public TaskToGoal getById(long id) {

@@ -2,10 +2,8 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.DoneGoals;
-import com.himalayapp.splanning.server.entity.DoneTasks;
+import com.himalayapp.splanning.server.entity.DoneGoal;
 import com.himalayapp.splanning.server.repository.DoneGoalsRepository;
-import com.himalayapp.splanning.server.repository.DoneTasksRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.service.DoneGoalsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +20,13 @@ public class DoneGoalsServiceImpl implements DoneGoalsService {
     @Autowired
     private SynchronizerRepository sr;
 
-    public List<DoneGoals> getAll() {
+    public List<DoneGoal> getAll() {
         return repository.findAll();
     }
 
-    public DoneGoals save(DoneGoals enitity, long userId) {
-        DoneGoals newEntity = repository.saveAndFlush(enitity);
+    public DoneGoal save(DoneGoal enitity, long userId) {
+        System.out.println("save " + enitity);
+        DoneGoal newEntity = repository.saveAndFlush(enitity);
 
         int tableId = Constants.dbTables.get(Constants.DONE_GOALS_TABLE);
 
@@ -35,7 +34,7 @@ public class DoneGoalsServiceImpl implements DoneGoalsService {
         return newEntity;
     }
 
-    public DoneGoals getById(long id) {
+    public DoneGoal getById(long id) {
         return repository.findOne(id);
     }
 

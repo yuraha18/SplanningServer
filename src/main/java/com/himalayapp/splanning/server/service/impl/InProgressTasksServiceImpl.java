@@ -2,9 +2,7 @@ package com.himalayapp.splanning.server.service.impl;
 
 import com.himalayapp.splanning.server.Constants;
 import com.himalayapp.splanning.server.Synchronization;
-import com.himalayapp.splanning.server.entity.DoneTasks;
-import com.himalayapp.splanning.server.entity.InProgressTasks;
-import com.himalayapp.splanning.server.repository.DoneTasksRepository;
+import com.himalayapp.splanning.server.entity.InProgressTask;
 import com.himalayapp.splanning.server.repository.InProgressTasksRepository;
 import com.himalayapp.splanning.server.repository.SynchronizerRepository;
 import com.himalayapp.splanning.server.service.InProgressTasksService;
@@ -23,19 +21,19 @@ public class InProgressTasksServiceImpl  implements InProgressTasksService{
     @Autowired
     private SynchronizerRepository sr;
 
-    public List<InProgressTasks> getAll() {
+    public List<InProgressTask> getAll() {
         return repository.findAll();
     }
 
-    public InProgressTasks save(InProgressTasks enitity, long userId) {
-        InProgressTasks newEntity = repository.saveAndFlush(enitity);
+    public InProgressTask save(InProgressTask enitity, long userId) {
+        InProgressTask newEntity = repository.saveAndFlush(enitity);
 
         int tableId = Constants.dbTables.get(Constants.IN_PROGRESS_TASKS_TABLE);
         sr.saveAndFlush(Synchronization.getSynchronizer(newEntity.getId(), tableId, userId));
         return newEntity;
     }
 
-    public InProgressTasks getById(long id) {
+    public InProgressTask getById(long id) {
         return repository.findOne(id);
     }
 }
